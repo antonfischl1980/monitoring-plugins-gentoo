@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  perl lint:
+  perlcritic:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
