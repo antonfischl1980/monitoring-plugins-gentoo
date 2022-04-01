@@ -73,7 +73,7 @@ $np->add_arg( spec => "critical|c=i",
 
 $np->getopts;
 
-chomp(my $portdir = `portageq portdir`);
+chomp(my $portdir = `portageq get_repo_path / gentoo`);
 
 if ( $? == -1 ) {
     $np->nagios_die("Unable to execute portageq distdir: $!");
