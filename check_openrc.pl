@@ -83,6 +83,8 @@ foreach my $line (split('\n', $output)) {
 	    push(@stopped, $service);
 	} elsif ( $status eq 'crashed' ) {
 	    push(@crashed, $service);
+	} elsif ( $status eq 'failed' ) {
+	    push(@crashed, $service);
 	} elsif ( $status eq 'started' ) {
 	    push(@started, $service);
 	} else {
@@ -102,7 +104,7 @@ if ( scalar(@stopped) > 0 ) {
 
 if ( scalar(@crashed) > 0 ) {
     $code = CRITICAL;
-    $message .= "CRASHED " . join(', ', @stopped);
+    $message .= "CRASHED " . join(', ', @crashed);
 }
 
 $np->nagios_exit($code, $message . "\n" . $extmessage);
