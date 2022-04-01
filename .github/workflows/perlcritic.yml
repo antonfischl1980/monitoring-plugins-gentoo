@@ -1,0 +1,22 @@
+name: Perl Lint
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  perl lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install perlcritic
+      run: | 
+        sudo apt-get update && sudo apt-get install -y libperl-critic-perl
+
+    - name: perlcritic
+      run: |
+        perlcritic --color *.pl
+
