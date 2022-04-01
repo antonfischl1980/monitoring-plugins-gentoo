@@ -85,10 +85,10 @@ if ( $portdir eq "" ) {
     $np->nagios_die("Unable to identify portdir");
 }
 
-open TIMESTAMP, ($portdir . "/metadata/timestamp.chk")
+open my $TIMESTAMP_FH, "<:encoding(UTF-8)", ($portdir . "/metadata/timestamp.chk")
     or $np->nagios_die("Unable to open $portdir/metadata/timestamp.chk");
-chomp(my $timestamp_str = readline(TIMESTAMP));
-close(TIMESTAMP);
+chomp(my $timestamp_str = readline($TIMESTAMP_FH));
+close($TIMESTAMP_FH);
 
 my $timestamp = str2time($timestamp_str);
 my $difference = time() - $timestamp;
