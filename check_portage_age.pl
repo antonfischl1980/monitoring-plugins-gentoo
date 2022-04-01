@@ -56,7 +56,7 @@ my $np = Monitoring::Plugin->new( shortname => "PORTAGE_AGE",
 			      blurb => "Check Portage tree age (last sync)",
 			      license => $LICENSE,
 			      version => '0',
-			      url => 'https://github.com/Flameeyes/nagios-plugins-flameeyes',
+			      url => 'https://github.com/antonfischl1980/monitoring-plugins-gentoo',
 			    );
 
 $np->add_arg( spec => "warning|w=i",

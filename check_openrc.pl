@@ -53,7 +53,7 @@ my $np = Monitoring::Plugin->new( shortname => "OPENRC",
 			      blurb => "Check services status on OpenRC",
 			      license => $LICENSE,
 			      version => '0',
-			      url => 'https://github.com/Flameeyes/nagios-plugins-flameeyes',
+			      url => 'https://github.com/antonfischl1980/monitoring-plugins-gentoo',
 			    );
 
 $np->add_arg( spec => "stopped-critical|s",
