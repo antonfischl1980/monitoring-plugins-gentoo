@@ -51,7 +51,7 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         name: ${{ steps.environment.outputs.RELEASE_NAME }}
-        artifacts: "${{ steps.environment.outputs.TAR_NAME }}.*"
+        artifacts: "${{ steps.environment.outputs.TAR_NAME }}.tar.*"
         bodyFile: CHANGELOG
 
 
