@@ -1,0 +1,57 @@
+name: Release
+
+on: 
+  push:
+    tags:
+    - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: setup environment
+      id: environment
+      run: |
+        NEW_VERSION="$(echo "${{ github.ref_name }}"|sed -E 's#^v##')"
+        echo "::set-output name=NEW_VERSION::$NEW_VERSION"
+        PREVIOUS_TAG="$(git tag|grep ^v|tail -2|head -1)"
+        echo "::set-output name=PREVIOUS_TAG::$PREVIOUS_TAG"
+        TAR_NAME="$(echo "${{ github.repository }}-${{ github.ref_name }}.tar"|sed -E 's#^[^/]+/##; s#-v([0-9])#-\1#')"
+        echo "::set-output name=TAR_NAME::$TAR_NAME"
+        RELEASE_NAME="$(echo "Release $NEW_VERSION")"
+        echo "::set-output name=RELEASE_NAME::$RELEASE_NAME"
+
+    - name: Update versions in perl files
+      run: |
+        sed --in-place -E "s#^(\\s+version => ')([^']+)('.*)\$#\\1${{ steps.environment.outputs.NEW_VERSION }}\\3#" *.pl
+        git diff
+
+    - name: Build .tar
+      run: |
+        tar -cavf ${{ steps.environment.outputs.TAR_NAME }} *
+        gzip -9 < ${{ steps.environment.outputs.TAR_NAME }} >${{ steps.environment.outputs.TAR_NAME }}.gz
+        xz -9e < ${{ steps.environment.outputs.TAR_NAME }} >${{ steps.environment.outputs.TAR_NAME }}.xz
+
+    - name: Changelog since last tag
+      run: |
+        PREVIOUS_TAG="$(git tag|grep ^v|tail -2|head -1)"
+        echo "PREVIOUS_TAG"
+        echo "Changes since ${PREVIOUS_TAG}:" >CHANGELOG
+        git log --oneline ${PREVIOUS_TAG}..${{ github.ref_name }} >> CHANGELOG
+
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      with:
+        name: ${{ steps.environment.outputs.RELEASE_NAME }}
+        artifacts: "${{ steps.environment.outputs.TAR_NAME }}.*"
+        bodyFile: CHANGELOG
+
+
