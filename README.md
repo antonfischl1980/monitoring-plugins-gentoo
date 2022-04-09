@@ -30,5 +30,12 @@ the newest ebuild will be published in my [icinga-Overlay](https://github.com/an
     emerge --sync
     emerge net-analyzer/monitoring-plugins-gentoo
 
+If you insist on installing it manually:
+- make sure to have the dependencies installed
+
+
+      cp -a *.pl /usr/lib64/nagios/plugins/
+      cp -a *.conf /usr/share/icinga2/include/plugins-contrib.d/
+
 ### Thanks
 [@Flameeyes](https://github.com/Flameeyes) for writing these checks almost 10 years ago
