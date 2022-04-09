@@ -24,7 +24,7 @@ jobs:
         echo "::set-output name=NEW_VERSION::$NEW_VERSION"
         PREVIOUS_TAG="$(git tag|grep ^v|tail -2|head -1)"
         echo "::set-output name=PREVIOUS_TAG::$PREVIOUS_TAG"
-        TAR_NAME="$(echo "${{ github.repository }}-${{ github.ref_name }}.tar"|sed -E 's#^[^/]+/##; s#-v([0-9])#-\1#')"
+        TAR_NAME="$(echo "${{ github.repository }}-${{ github.ref_name }}"|sed -E 's#^[^/]+/##; s#-v([0-9])#-\1#')"
         echo "::set-output name=TAR_NAME::$TAR_NAME"
         RELEASE_NAME="$(echo "Release $NEW_VERSION")"
         echo "::set-output name=RELEASE_NAME::$RELEASE_NAME"
@@ -36,9 +36,9 @@ jobs:
 
     - name: Build .tar
       run: |
-        tar -cavf ${{ steps.environment.outputs.TAR_NAME }} *
-        gzip -9 < ${{ steps.environment.outputs.TAR_NAME }} >${{ steps.environment.outputs.TAR_NAME }}.gz
-        xz -9e < ${{ steps.environment.outputs.TAR_NAME }} >${{ steps.environment.outputs.TAR_NAME }}.xz
+        tar -cav --transform 's,^,${{ steps.environment.outputs.TAR_NAME }}/,' -f ${{ steps.environment.outputs.TAR_NAME }}.tar *
+        gzip -9 < ${{ steps.environment.outputs.TAR_NAME }}.tar >${{ steps.environment.outputs.TAR_NAME }}.tar.gz
+        xz -9e < ${{ steps.environment.outputs.TAR_NAME }}.tar >${{ steps.environment.outputs.TAR_NAME }}.tar.xz
 
     - name: Changelog since last tag
       run: |
