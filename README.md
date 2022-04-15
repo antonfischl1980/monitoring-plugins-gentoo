@@ -6,7 +6,7 @@ This repository started as an import of 2 checks from https://github.com/Flameey
 
 I will maintain these check-plugins and add new gentoo-specific checks when the need arises.
 
-Please feel free to fork and send pull request for any enhacement or fix you come up with.
+Please feel free to fork and send pull request for any enhancement or fix you come up with.
 
 ### License
 
