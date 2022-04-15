@@ -1,5 +1,7 @@
 # Gentoo specific Nagios/Icinga/Monitoring plugins
 
+![GitHub all releases](https://img.shields.io/github/downloads/antonfischl1980/monitoring-plugins-gentoo/total)
+
 This repository started as an import of 2 checks from https://github.com/Flameeyes/nagios-plugins-flameeyes .
 
 I will maintain these check-plugins and add new gentoo-specific checks when the need arises.
