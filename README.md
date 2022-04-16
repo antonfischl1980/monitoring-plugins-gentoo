@@ -1,5 +1,6 @@
 # Gentoo specific Nagios/Icinga/Monitoring plugins
 
+[![perlcritic](https://github.com/antonfischl1980/monitoring-plugins-gentoo/actions/workflows/perlcritic.yml/badge.svg)](https://github.com/antonfischl1980/monitoring-plugins-gentoo/actions/workflows/perlcritic.yml)
 ![GitHub all releases](https://img.shields.io/github/downloads/antonfischl1980/monitoring-plugins-gentoo/total)
 
 This repository started as an import of 2 checks from https://github.com/Flameeyes/nagios-plugins-flameeyes .
