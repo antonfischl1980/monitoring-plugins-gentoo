@@ -92,7 +92,7 @@ close($TIMESTAMP_FH);
 
 my $timestamp = str2time($timestamp_str);
 my $difference = time() - $timestamp;
-my $message = "last sync " . duration($difference) . " ago";
+my $message = "last sync " . duration($difference) . " ago | last_sync=" . $difference . "s;" . $np->opts->warning . ";" . $np->opts->critical . ";0;;";
 
 my $code;
 if ( $difference > $np->opts->critical ) {
