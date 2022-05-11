@@ -34,10 +34,14 @@ the newest ebuild will be published in my [icinga-Overlay](https://github.com/an
 
 If you insist on installing it manually:
 - make sure to have the dependencies installed
+- since 1.2.0 check_openrc.pl will be run as root. See [sudoers.d/check_openrc](https://github.com/antonfischl1980/monitoring-plugins-gentoo/blob/main/sudoers.d/check_openrc) and [icinga-command-definitions/check_openrc.conf](https://github.com/antonfischl1980/monitoring-plugins-gentoo/blob/main/icinga-command-definitions/check_openrc.conf)
 
 
       cp -a *.pl /usr/lib64/nagios/plugins/
-      cp -a *.conf /usr/share/icinga2/include/plugins-contrib.d/
+      cp -a icinga-command-definitions/*.conf /usr/share/icinga2/include/plugins-contrib.d/
+      cp -a sudoers.d/* /etc/sudoers.d/
+      cp -a icingaweb-graphite-template/*.ini /usr/share/icingaweb2/modules/graphite/templates/ 
+      
 
 ### Thanks
 [@Flameeyes](https://github.com/Flameeyes) for writing these checks almost 10 years ago
