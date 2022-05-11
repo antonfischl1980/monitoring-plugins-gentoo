@@ -96,6 +96,7 @@ foreach my $line (split('\n', $output)) {
 my $code = OK;
 my $message = "";
 my $extmessage = "Running services: " . join(', ', @started);
+my $perfdata="|count_started=" . scalar(@started) . " count_stopped=" . scalar(@stopped) . " count_crashed=" . scalar(@crashed);
 
 if ( scalar(@stopped) > 0 ) {
     $code = $np->opts->get("stopped-critical") ? CRITICAL : WARNING;
@@ -107,4 +108,4 @@ if ( scalar(@crashed) > 0 ) {
     $message .= "CRASHED " . join(', ', @crashed);
 }
 
-$np->nagios_exit($code, $message . "\n" . $extmessage);
+$np->nagios_exit($code, $message . $perfdata . "\n" . $extmessage);
