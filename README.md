@@ -11,7 +11,7 @@ Please feel free to fork and send pull request for any enhancement or fix you co
 
 ### License
 
-Each plugin will provide its own license header to make it clear under which license it's released under. Most of them you'll see having a MIT license, which basically is an all-permissive license. If different licenses are used, it's usually because the plugin is derived from another one that was published under a different license.
+Each plugin will provide its own license header to make it clear under which license it's released. Most of them you'll see having a MIT license, which basically is an all-permissive license. If different licenses are used, it's usually because the plugin is derived from another one that was published under a different license.
 
 ### Dependencies
 All Perl-based plugins will require Monitoring::Plugin at the very least, as that implements the basic Nagios API in a flexible way.
